@@ -8,6 +8,7 @@ $ tail index.txt 	# last 10 lines from the end by default
 $ tail -n 5 index.txt 	# last 5 lines from the end 
 $ tail -c 10 index.txt 	# last 10 bytes(chars) from the end 
 $ tail -n +12 index.txt # last lines of the file starting from line 12
+$ tail -n +11 index.txt | head -n 5 # extract from line 11 to line 15
 
 # wc command
 $ wc intro.txt 		# line + word + character count
@@ -52,7 +53,7 @@ $ sort -n numbers.txt | uniq -d
 $ sort -n numbers.txt | uniq -dc
 
 # sed command i.e. stream editor command
-# sed 's/regex pattern/replacement string/' file
+# sed 's/regex-pattern/replacement-string/' file
 $ sed 's/a/@/' towns.txt 	# replace first occurrence of a with @
 $ sed 's/a/@/g' towns.txt 	# replace all occurrences of a with @
 $ sed 's/Pineapple/Feta/' toppings.txt 
@@ -101,20 +102,22 @@ $ grep -wiR "dhaka" /home/username/Desktop/
 $ grep -wiR -B 2 -A 1 "dhaka" .	# print 2 lines before and 1 line after matched pattern
 $ grep -wiR -c 1 "dhaka" .	# print 1 line before and after the matched pattern
 $ grep -v "dhaka" cities.txt	# print results not matching the pattern
+$ grep -wiv "dhaka" cities.txt	# print results not matching the pattern
 $ grep -P "\d{4}" numbers.txt
 $ grep -P "[a-zA-Z]+" names.txt	# POSIX regex
 $ grep -E "[a-zA-Z]+" names.txt	# extended regex
 $ grep -P "\d{3}-\d{3}-\d{4}" contacts-short.csv
 $ grep -oP "[a-zA-Z0-9\._\-%]+@[a-zA-Z0-9\._\-%]+\.(com|org|edu)" contacts-long.csv 
+$ grep -oP "\d{3}-\d{3}-\d{4}" contacts-long.csv | sort -f > mobile-numbers.txt 
 $ history | grep "awk"
 $ history | grep "find"
 $ ifconfig | grep -oE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" # ip address
 # '-' i.e. range symbol needs to be escaped if included in regex pattern
 
 # awk command
-$ awk '{print $0}' index.txt		# space delimited
-$ awk '{print $1}' index.txt		# space delimited
-$ awk '{print $2}' index.txt		# space delimited
+$ awk '{print $0}' index.txt		# whole line, space delimited
+$ awk '{print $1}' index.txt		# first match, space delimited
+$ awk '{print $2}' index.txt		# second, space delimited
 $ awk '{print $NF}' index.txt		# space delimited
 $ awk '{print $1-$2}' index.txt		# space delimited
 $ awk -F',' '{print $1}' names-age.csv	# comma delimited
@@ -122,8 +125,9 @@ $ awk -F',' '{print $1 $2}' names-age.csv
 $ awk -F$'\t' '{print $1 $2}' sample.tsv # tab delimited""
 $ awk '{sum+=$1}END{print sum}' matrix.txt 
 $ echo "welcome to bash programming" | awk '{print $3, $4}'
-$ printf '1:2:3' | awk -F ":" '{print $1+$2+$3}'
-$ printf '1 2 3' | awk 'BEGIN {OFS=":"}; {print $1,$2,$3}'
+$ echo "1:2:3" | awk -F':' '{print $1+$2+$3}'
+$ printf "1:2:3" | awk -F':' '{print $1+$2+$3}'
+$ printf "1 2 3" | awk 'BEGIN {OFS=":"};{print $1+$2+$3}'
 
 # cut command
 $ cut -b 1 names.txt	# cuts 1st byte from every line
@@ -140,9 +144,8 @@ $ echo "slicing example" | cut -c 5-7
 $ echo "slicing example" | cut -c 5,7
 $ echo "slicing example" | cut --complement -c 5,7
 $ cut -f 1 names-age.csv	# no delimiter, so space delimited
-$ cut -d "," -f 1 names-age.csv # comma delimited
-$ cut -d "," -f 2 names-age.csv	# comma delimited
-$ cut -d "," -f 3 names-age.csv	# comma delimited
-$ cut -d "@" -f 1 emails.txt	# @ delimited
-$ cut -d "@" -f 2 emails.txt	# @ delimited
-
+$ cut -d',' -f 1 names-age.csv # comma delimited
+$ cut -d',' -f 2 names-age.csv	# comma delimited
+$ cut -d',' -f 3 names-age.csv	# comma delimited
+$ cut -d'@' -f 1 emails.txt	# @ delimited
+$ cut -d'@' -f 2 emails.txt	# @ delimited

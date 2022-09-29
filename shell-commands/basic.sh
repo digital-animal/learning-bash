@@ -1,4 +1,18 @@
 # # ====================================================
+# # MISCELLANEOUS SHORTCUTS
+$ ctrl + l	# clear shortcut
+$ ctrl + a	# start of line
+$ ctrl + e	# end of line
+$ ctrl + w	# delete word
+$ ctrl + c	# cancel a command, process
+$ ctrl + z	# force exit a process
+$ ctrl + r	# search terminal history
+$ ctrl + d	# close current terminal tab
+$ ctrl + alt + t	# new terminal window
+$ ctrl + shif+ t	# new terminal tab
+$ ctrl + shif+ w	# close current terminal tab
+
+# # ====================================================
 # # MISCELLANEOUS COMMANDAS
 $ clear 	# clear screen
 $ reset		# reset shell
@@ -50,7 +64,6 @@ $ whatis awk
 $ cheat pwd
 $ cheat awk
 
-
 # # ====================================================
 # # FILE AND DIRECTORY RELATED COMMANDS
 # echo command to print string
@@ -66,7 +79,7 @@ $ rev filename.ext
 $ echo "1234" | rev
 
 # file command
-$ file		# determine file type
+$ file msg.txt	# determine file type
 
 # stat command
 $ stat file
@@ -94,7 +107,7 @@ $ ll 		# ll is aliased to `ls -alF'
 
 # tree command
 $ tree
-$ tree -L 2
+$ tree -L 2	# tree up to level 2
 $ tree --prune
 
 # cat command
@@ -118,8 +131,14 @@ $ cat lineParser.h; cat script.sh; cat main.cpp # display multiple files at once
 $ cat input.txt > output.md
 $ cat input.txt >> output.md # appending
 
+$ head cities.txt 	# first 10 line by default
+$ head -n 5 cities.txt	# first 5 line
+$ tail cities.txt 	# last 10 lines by default
+$ tail -n 5 cities.txt 	# last 5 lines
+
 # cp command
-$ cp /dir/abc.txt /dir/subdir
+$ cp /dir/abc.txt /dir/subdir	# copying file to dir
+$ cp abc.txt xyz.txt		# copying from file to file
 
 # mv command
 $ mv [src] [destination]
@@ -129,6 +148,28 @@ $ mv -f index.txt /dir/subdir 	# force overwrite if already exists
 $ mv -i index.txt /dir/subdir 	# ask permission to overwrite if already exists
 $ mv -n index.txt /dir/subdir 	# never overwrite if already exists
 
+# rename - renames multiple files
+$ rename 'y/A-Z/a-z/' *
+$ rename 's/sometext/replacedby/' *
+
+# to create a symlink
+$ ln -s <source-location> <symlink-location>
+$ ln -s /media/zahid/SeagateHD/LATEX ~/Desktop/
+
+# To symlink, while overwriting existing destination files
+$ ln -sf <source-location> <symlink-location>
+
+# alias in .bashrc
+$ alias python='/usr/bin/python3.10'
+$ alias open='xdg-open'
+$ alias hd='cd /media/zahid/SeagateHD'
+$ alias dt='cd /home/zahid/Desktop'
+$ PROMPT_DIRTRIM=1
+
+$ open msg.txt
+$ open ~/Desktop/
+$ open https://www.google.com
+
 # pwd commnad to show the absolute path of your current working directory
 $ pwd
 
@@ -137,13 +178,15 @@ $ cd path/to/directory
 $ cd	# change to home directory of the current user
 $ cd .. # go up to the parent of the current directory
 $ cd -  # go to the previously chosen directory
-$ cd ~ 	# change to root directory
+$ cd ~ 	# change to home directory
+$ cd / 	# change to root directory
 
 # pushing current directory to the top of a stack while changing to the specified directory
-pushd <directory>
+$ pushd <directory>
+$ pushd .	# pushing current dir to directory stack
 
 # To return use popd
-popd
+$ popd
 
 # mkdir command
 $ mkdir dirName
@@ -155,12 +198,13 @@ $ rmdir dirName # should be empty
 
 # touch command
 $ touch fileName.txt
+$ touch file-{001..100}.txt 	# ellipsis
 $ mkdir -p parent/child/fileName.txt
-
 # rm command
 $ rm fileName.txt
 $ rm -r dirName/fileName.txt
 $ rm -rf dirName/fileName.txt
+$ rm -rf dirName
 
 # chmod command
 # read(r) = 4, write(w) = 2, exec(x) = 1
@@ -170,10 +214,10 @@ $ rm -rf dirName/fileName.txt
 # r-x = read & execute
 # -wx = write & execute
 # rwxr-x--x = rwx(owner) + rx(user group) + x(world)
-$ chmod 777 abc.sh
-$ chmod 666 abc.sh
-$ chmod 711 abc.sh
-$ chmod u+x myscript.sh
+$ chmod 777 abc.sh	# binary: 111 111 111
+$ chmod 666 abc.sh	# binary: 110 110 110
+$ chmod 711 abc.sh	# binary: 111 001 001
+$ chmod u+x myscript.sh	
 $ chmod g+x myscript.sh
 $ chmod o+x myscript.sh
 $ chmod a+x myscript.sh
@@ -184,16 +228,26 @@ $ chown root username
 
 # tar command
 # To extract a .tgz or .tar.gz archive:
-tar -xvf /path/to/foo.tar	# extract an uncompressed archive
-tar -xzvf /path/to/foo.tgz	# extract an compressed archive
-tar -xzvf /path/to/foo.tar.gz
-tar -xvf /path/to/foo.tar -C /path/to/destination/ # extract a .tar in specified Directory
+$ tar -xvf /path/to/foo.tar	# extract an uncompressed archive
+$ tar -xzvf /path/to/foo.tgz	# extract an compressed archive
+$ tar -xzvf /path/to/foo.tar.gz
+$ tar -xvf /path/to/foo.tar -C /path/to/destination/ # extract a .tar in specified Directory
+
+$ tar -tvf /path/to/foo.tar	# listing files
+$ tar -tzvf /path/to/foo.tgz	# listing files
+$ tar -tzvf /path/to/foo.tar.gz	# listing files
 
 # To create a .tgz or .tar.gz archive:
-tar -cvf /path/to/foo.tar /path/to/foo/ 	# create an uncompressed archive
-tar -czvf /path/to/foo.tgz /path/to/foo/ 	# create an compressed archive
-tar -czvf /path/to/foo.tar.gz /path/to/foo/
+$ tar -cvf /path/to/foo.tar /path/to/foo/ 	# create an uncompressed archive
+$ tar -czvf /path/to/foo.tgz /path/to/foo/ 	# create an compressed archive
+$ tar -czvf /path/to/foo.tar.gz /path/to/foo/
 
+$ unzip archive.zip 
+$ unzip file.zip -d destination_folder
+$ unzip mysite.zip -d /var/www
+
+$ zip -r files.zip .
+$ 7z l files.zip	# sudo apt install p7zip-full	
 
 # # ====================================================
 # # OPERATING SYSTEM AND HARDWARE RELATED COMMANDS 
@@ -203,6 +257,7 @@ $ neofetch 	# prints system summary in donought shape
 # du command
 $ du 		# disk usage as list
 $ du -sh	# disk usage cumulative size
+$ du -h 	# human readable
 $ du -h --max-depth=1
 
 # ncdu command (NCurses Disk Usage)
@@ -214,7 +269,7 @@ $ df -h		# free disk space as human readable format
 
 # ps command reports a snapshot of the current processes
 $ ps
-$ ps -A
+$ ps -A		# all process
 $ ps aux
 $ ps aux | grep processName
 
@@ -252,6 +307,9 @@ $ top -n 10 # quit after 10 refresh
 # htop command
 $ htop
 
+# btop command
+$ btop	# sudo apt install btop
+
 # uname command (unix name)
 $ uname 	# system name
 $ uname -s 	# kernel name
@@ -286,6 +344,10 @@ $ shutdown -P +5 	# shutdown five minutes from now
 $ shutdown -r +5 	# reboot five minutes from now
 $ shutdown -c 		# cancel shutdown
 
+# rtcwake - enter a system sleep state until specified wakeup time
+$ sudo rtcwake --mode mem --date 18:00
+$ sudo rtcwake --mode mem --date tomorrow # (time is set to 00:00:00)
+$ sudo rtcwake --mode mem --date +5min    # wake up after 4 minutes
 
 # # ====================================================
 # # NETWORKING COMMANDS
@@ -325,4 +387,3 @@ $ sudo netstat -r 	# kernel routing table
 
 # fast command to check bandwidth
 $ fast
-
